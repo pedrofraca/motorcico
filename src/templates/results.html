@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block content %}
+<div>
+  <div>
+    <div>
+      Your search about <strong> {{ search_term }} </strong> has returned {{ items_found }} items in {{ seconds }} seconds :
+    </div>
+  </div>
+</div>
+<table>
+<tbody>
+{% for item in items %}
+<tr>
+  <td>
+    {% if item.price %}
+       <a href={{item.link}}>{{item.title}} ----> {{item.price}}</a>
+    {% else %}
+       <a href={{item.link}}>{{item.title}}</a>
+    {% endif %}
+</td>
+  <td>
+  {% if item.image %}
+  <img src={{item.image}} href={{item.link}}></img>
+  {% endif %}
+  </td>
+</tr>
+
+{% endfor %}
+</tbody>
+</table>
+<div>
+  <ul>
+    {% for page in pages %}
+    <li><a href="/result?c={{ search_term }}&p={{ page }}">{{ page }}</a></li>
+    {% endfor %}
+  </ul>
+</div>
+{% endblock %}

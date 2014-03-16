@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div>
+  <h1>Index and search</h1>
+  <p>Our database is infected with thousands of items ready to be searched.</p>
+  <div>
+    <form action="/index" method="get">
+      <input id="data" name="t" type="text">
+      <input id="data" name="l" type="text">
+      <button type="submit">index</button>
+    </form>
+  </div>
+  <div>
+    <form action="/result" method="get">
+      <input id="data" name="c" type="text" placeholder="search">
+      <button type="submit">search</button>
+    </form>
+  </div>
+</div>
+<br>
+<hr>
+<div>
+  <div>
+    <div><h1>Elements Indexed</h1></div>
+    <div><h4>{{ items }}</h4></div>
+  </div>
+  <div>
+    <div>
+      <h1>Most Wanted</h1>
+      <ul>
+	{% for item in most_searched %}
+	<a href="/result?c={{item.searchterm}}"><li>{{item.searchterm}}</li></a>
+	{% endfor %}
+      </ul>
+    </div>
+  </div>
+</div>
+{% endblock %}
